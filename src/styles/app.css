@@ -3183,6 +3183,86 @@ code {
   margin-top: 16px;
 }
 
+/* ---------- me · quickform ---------- */
+
+.qf-fields {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+@media (min-width: 640px) {
+  .qf-fields {
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+.qf-fields label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.qf-fields label > span {
+  font: 600 12px/1.2 var(--sans);
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+}
+.qf-fields input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--card-2);
+  color: var(--ink);
+  font-size: 14px;
+}
+.qf-fields input::placeholder {
+  color: var(--ink-4);
+}
+.qf-status {
+  margin-top: 12px;
+}
+.qf-saves {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.qf-saves li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card-2);
+}
+.qf-saves li > div {
+  min-width: 0;
+}
+.qf-saves b {
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+}
+.qf-saves small {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: 12.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.qf-saves .btn {
+  flex: none;
+}
+.qf-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+
 /* ---------- about ---------- */
 
 .about-hero {

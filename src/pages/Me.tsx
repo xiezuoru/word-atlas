@@ -1,6 +1,7 @@
-import { Download, RotateCcw, Upload } from "lucide-react";
-import { useMemo, useRef } from "react";
+import { CloudDownload, CloudUpload, Download, FileDown, RotateCcw, Upload } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
 import { useAtlas } from "../atlas/context";
+import { listCloudSaves, saveToCloud, type CloudSave } from "../lib/quickform";
 import { isMastered } from "../store/srs";
 import { dayKey, exportBackup, importBackup, resetProgress, store, useStore, type Settings } from "../store/store";
 import { toast } from "../ui/Toast";
@@ -180,8 +181,8 @@ export function Me({ privateAvailable }: { privateAvailable: boolean }) {
         </section>
 
         <section className="panel">
-          <h3 className="eyebrow">数据</h3>
-          <p className="muted">进度只存在这台设备的浏览器里：没有账号，没有服务器。换设备时，导出备份再导入即可。</p>
+          <h3 className="eyebrow">数据（本地）</h3>
+          <p className="muted">进度只存在这台设备的浏览器里。换设备时，可以导出备份再导入，或保存到 QuickForm。</p>
           {saveError && <p className="warn-text">浏览器拒绝保存（可能是隐私模式或空间已满）。请尽快导出备份。</p>}
           <div className="data-actions">
             <button className="btn btn-ghost" onClick={download}>
@@ -204,8 +205,133 @@ export function Me({ privateAvailable }: { privateAvailable: boolean }) {
             </button>
           </div>
         </section>
+
+        <section className="panel">
+          <QuickFormCard />
+        </section>
       </div>
     </div>
+  );
+}
+
+/* ---------- 数据（QuickForm）---------- */
+
+const QF_KEY = "word-atlas:quickform";
+
+function readQf(): { id?: string; note?: string } {
+  try {
+    const v = JSON.parse(localStorage.getItem(QF_KEY) ?? "{}");
+    return v && typeof v === "object" ? v : {};
+  } catch {
+    return {};
+  }
+}
+
+function QuickFormCard() {
+  const [id, setId] = useState(readQf().id ?? "");
+  const [note, setNote] = useState(readQf().note ?? "");
+  const [busy, setBusy] = useState<"save" | "load" | null>(null);
+  const [error, setError] = useState("");
+  const [saves, setSaves] = useState<CloudSave[] | null>(null);
+
+  const remember = () => {
+    try {
+      localStorage.setItem(QF_KEY, JSON.stringify({ id: id.trim(), note: note.trim() }));
+    } catch {
+      /* 隐私模式下静默跳过 */
+    }
+  };
+
+  const save = async () => {
+    const email = id.trim();
+    if (!email) return setError("请先填写你的邮箱 id。");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return setError("id 需要使用邮箱地址。");
+    setError("");
+    setBusy("save");
+    const r = await saveToCloud(email, note.trim().slice(0, 100));
+    setBusy(null);
+    if (r.ok) {
+      remember();
+      toast("进度已保存到 QuickForm。", "ok");
+    } else setError(r.error);
+  };
+
+  const load = async () => {
+    const email = id.trim();
+    if (!email) return setError("请先填写你的邮箱 id。");
+    setError("");
+    setBusy("load");
+    setSaves(null);
+    const r = await listCloudSaves(email);
+    setBusy(null);
+    if (!r.ok) return setError(r.error);
+    remember();
+    setSaves(r.saves);
+  };
+
+  const restore = (s: CloudSave) => {
+    if (!confirm(`导入 ${s.time}（${s.note || "无说明"}）的进度？当前本机的学习记录会被覆盖。`)) return;
+    const r = importBackup(s.backup);
+    toast(r.ok ? `已恢复 ${r.cards} 个词的记忆` : r.error, r.ok ? "ok" : "warn");
+  };
+
+  return (
+    <>
+      <h3 className="eyebrow">数据（QuickForm）</h3>
+      <p className="muted">可以将学习进度保存到 QuickForm，随时导入。请使用自己的邮箱地址作为 id，并简要写一句进度说明（如，在温科高AI科创中心）。</p>
+      <div className="qf-fields">
+        <label>
+          <span>id（邮箱）</span>
+          <input type="email" value={id} maxLength={100} placeholder="you@example.com" onChange={(e) => setId(e.target.value)} />
+        </label>
+        <label>
+          <span>进度说明</span>
+          <input type="text" value={note} maxLength={100} placeholder="如：在温科高AI科创中心" onChange={(e) => setNote(e.target.value)} />
+        </label>
+      </div>
+      <div className="data-actions">
+        <button className="btn btn-ghost" onClick={save} disabled={busy !== null}>
+          <CloudUpload size={18} /> 保存进度
+        </button>
+        <button className="btn btn-ghost" onClick={load} disabled={busy !== null}>
+          <CloudDownload size={18} /> 读取进度
+        </button>
+      </div>
+      {busy === "save" && <p className="muted qf-status">正在保存…</p>}
+      {busy === "load" && <p className="muted qf-status">正在读取…</p>}
+      {error && <p className="warn-text qf-status">{error}</p>}
+      {saves && saves.length === 0 && <p className="muted qf-status">没有找到这个 id 的进度。确认 id 无误后，先在原设备保存。</p>}
+      {saves && saves.length > 0 && (
+        <ul className="qf-saves">
+          {saves.map((s) => (
+            <li key={s.saveId}>
+              <div>
+                <b>{s.time}</b>
+                <small>
+                  {s.note || "（无说明）"} · {s.cards} 词
+                </small>
+              </div>
+              <div className="qf-item-actions">
+                {s.attachmentUrl && (
+                  <a
+                    className="btn btn-ghost"
+                    href={s.attachmentUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    title="下载归档文件（浏览器无法自动读取时，可手动下载后用本地导入恢复）"
+                  >
+                    <FileDown size={18} />
+                  </a>
+                )}
+                <button className="btn btn-ghost" onClick={() => restore(s)} disabled={busy !== null}>
+                  导入
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
 

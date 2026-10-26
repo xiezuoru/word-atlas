@@ -1,2 +1,2 @@
-/** Public repository; change this in a fork. */
-export const REPO_URL = "https://github.com/designfuchen/word-atlas";
+/** Public repository (fork); change this if you re-fork. */
+export const REPO_URL = "https://github.com/xiezuoru/word-atlas";

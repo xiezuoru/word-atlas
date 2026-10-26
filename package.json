@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "A beautiful, open IELTS vocabulary atlas: 7,000+ illustrated words with UK/US audio, original examples and FSRS spaced repetition.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiezuoru/word-atlas.git"
+  },
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build",

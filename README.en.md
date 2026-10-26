@@ -17,6 +17,8 @@
 
 ---
 
+> **This is a fork.** Forked from [designfuchen/word-atlas](https://github.com/designfuchen/word-atlas) (the original Word Atlas), with additions such as QuickForm cloud progress backup (see "Me → Data (QuickForm)"). The vocabulary content, illustrations and recordings all come from the upstream project — full credit to the original author.
+
 Word Atlas gives every word a picture, two sentences and a review rhythm that brings it back right before you forget. Every word you learn lights a star in your own word galaxy: 7,298 stars, one per word, rendered with custom WebGL2 shaders. It is free, needs no account, shows no ads and keeps your progress on your own device. The interface is in Chinese, built for Chinese-speaking IELTS learners; the dataset is useful to anyone.
 
 Every definition, sentence, illustration and recording was made new for this project, paid for by the author, and released for free.

@@ -11,7 +11,7 @@
 
 [**打开词光 →**](https://0xlei.tech/words/) &nbsp;·&nbsp; [▶ 看宣传片](docs/assets/launch.mp4) &nbsp;·&nbsp; [下载词库](data/) &nbsp;·&nbsp; [**在 X 关注更新 →**](https://x.com/yangleiocx3) &nbsp;·&nbsp; [English](README.en.md)
 
-![MIT](https://img.shields.io/badge/code-MIT-1E2640) ![CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-C4573A) ![words](https://img.shields.io/badge/words-7%2C298-7F9B77) ![FSRS](https://img.shields.io/badge/scheduler-FSRS%206-D9A03A) ![no login](https://img.shields.io/badge/login-not%20required-6F93AE) ![GitHub stars](https://img.shields.io/github/stars/designfuchen/word-atlas?style=flat&color=E8B65A) [![Follow on X](https://img.shields.io/badge/X-@yangleiocx3-111?logo=x&logoColor=white)](https://x.com/yangleiocx3)
+![MIT](https://img.shields.io/badge/code-MIT-1E2640) ![CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-C4573A) ![words](https://img.shields.io/badge/words-7%2C298-7F9B77) ![FSRS](https://img.shields.io/badge/scheduler-FSRS%206-D9A03A) ![no login](https://img.shields.io/badge/login-not%20required-6F93AE) ![GitHub stars](https://img.shields.io/github/stars/xiezuoru/word-atlas?style=flat&color=E8B65A) [![Follow on X](https://img.shields.io/badge/X-@yangleiocx3-111?logo=x&logoColor=white)](https://x.com/yangleiocx3)
 
 <a href="docs/assets/launch.mp4"><img src="docs/assets/launch-preview.webp" alt="词光宣传片精华：每本单词书都从 abandon 开始" width="100%"></a>
 
@@ -20,6 +20,8 @@
 </div>
 
 ---
+
+> **这是 fork 版本。** 本仓库 fork 自 [designfuchen/word-atlas](https://github.com/designfuchen/word-atlas)（原项目：词光 Word Atlas），并在此基础上增加了 QuickForm 云端进度备份（见「我的 → 数据（QuickForm）」）等改动。词库内容、插画与录音均来自原项目，致谢原作者。
 
 ## 为什么做词光
 
@@ -164,7 +166,7 @@ b2_env = [w for w in words if w["cefr"] == "B2" and w["topic"] == "environment"]
 需要 Node.js 20+。
 
 ```bash
-git clone https://github.com/designfuchen/word-atlas.git
+git clone https://github.com/xiezuoru/word-atlas.git
 cd word-atlas
 npm ci
 npm run dev
@@ -215,7 +217,7 @@ npm run build       # 生产构建，输出到 dist/
 
 ## Star 趋势
 
-[![Star History Chart](https://api.star-history.com/svg?repos=designfuchen/word-atlas&type=Date)](https://star-history.com/#designfuchen/word-atlas&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=xiezuoru/word-atlas&type=Date)](https://star-history.com/#xiezuoru/word-atlas&Date)
 
 <div align="center">
 
