@@ -17,7 +17,7 @@
 
 ---
 
-> **This is a fork.** Forked from [designfuchen/word-atlas](https://github.com/designfuchen/word-atlas) (the original Word Atlas), with additions such as QuickForm cloud progress backup (see "Me → Data (QuickForm)"). The vocabulary content, illustrations and recordings all come from the upstream project — full credit to the original author.
+> **This is a fork.** Forked from [designfuchen/word-atlas](https://github.com/designfuchen/word-atlas) (the original Word Atlas), with additions such as QuickForm cloud progress backup (see "Me → Data (QuickForm)"); audio for harder words (B1+) and all example sentences now uses browser TTS, keeping only A1/A2 word pronunciations so the site stays under 20,000 files. The vocabulary content, illustrations and recordings all come from the upstream project — full credit to the original author.
 
 Word Atlas gives every word a picture, two sentences and a review rhythm that brings it back right before you forget. Every word you learn lights a star in your own word galaxy: 7,298 stars, one per word, rendered with custom WebGL2 shaders. It is free, needs no account, shows no ads and keeps your progress on your own device. The interface is in Chinese, built for Chinese-speaking IELTS learners; the dataset is useful to anyone.
 
@@ -28,7 +28,7 @@ Every definition, sentence, illustration and recording was made new for this pro
 | **7,298** | IELTS core entries, CEFR A1–C2, 19 topics |
 | **7,298** | original illustrations |
 | **14,596** | original example sentences with Chinese translations |
-| **22,905** | audio clips: UK and US pronunciation, narrated examples |
+| **3,648** | recorded audio clips (UK & US pronunciation for A1/A2 words); harder words and examples use device TTS |
 | **0** | accounts, ads or trackers |
 
 <p align="center"><a href="docs/assets/demo.mp4"><b>▶ Watch the 30-second app demo</b></a></p>
