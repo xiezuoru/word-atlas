@@ -1,89 +1,44 @@
 <div align="center">
 
-<img src="docs/assets/banner.jpg" alt="Word Atlas: 7,298 IELTS words, each with its own illustration" width="100%">
+# Word Atlas (fork)
 
-# Word Atlas 词光
+**One word, one picture. Light up your IELTS vocabulary.**
 
-**One word, one picture. Light up your IELTS vocabulary.**<br>
-7,298 core words · 14,596 original example sentences · 7,298 illustrations · UK & US audio · FSRS spaced repetition
-
-[**Open the app →**](https://words.quickform.cc/) &nbsp;·&nbsp; [▶ Launch film](docs/assets/launch.mp4) &nbsp;·&nbsp; [Download the dataset](data/) &nbsp;·&nbsp; [**Follow on X →**](https://x.com/yangleiocx3) &nbsp;·&nbsp; [中文](README.md)
-
-<a href="docs/assets/launch.mp4"><img src="docs/assets/launch-preview.webp" alt="Word Atlas launch film highlights" width="100%"></a>
-
-<sub>▶ Click to watch the full 48-second launch film (with sound)</sub>
+[**Open this fork →**](https://words.quickform.cc/) &nbsp;·&nbsp; [Original demo →](https://0xlei.tech/words/) &nbsp;·&nbsp; [Original repo →](https://github.com/designfuchen/word-atlas)
 
 </div>
 
 ---
 
-> **This is a fork.** Forked from [designfuchen/word-atlas](https://github.com/designfuchen/word-atlas) (the original Word Atlas), with additions such as QuickForm cloud progress backup (see "Me → Data (QuickForm)"); audio for harder words (B1+) and all example sentences now uses browser TTS, keeping only A1/A2 word pronunciations so the site stays under 20,000 files. The vocabulary content, illustrations and recordings all come from the upstream project — full credit to the original author.
+This is a fork of [designfuchen/word-atlas](https://github.com/designfuchen/word-atlas).
 
-Word Atlas gives every word a picture, two sentences and a review rhythm that brings it back right before you forget. Every word you learn lights a star in your own word galaxy: 7,298 stars, one per word, rendered with custom WebGL2 shaders. It is free, needs no account, shows no ads and keeps your progress on your own device. The interface is in Chinese, built for Chinese-speaking IELTS learners; the dataset is useful to anyone.
+For everything about Word Atlas itself — 7,298 core IELTS words, original illustrations and example sentences, UK/US audio, FSRS spaced repetition — see the [upstream README](https://github.com/designfuchen/word-atlas#readme). All vocabulary content and assets come from the upstream project; full credit to the original author.
 
-Every definition, sentence, illustration and recording was made new for this project, paid for by the author, and released for free.
+## What this fork changes
 
-| | |
-|---:|---|
-| **7,298** | IELTS core entries, CEFR A1–C2, 19 topics |
-| **7,298** | original illustrations |
-| **14,596** | original example sentences with Chinese translations |
-| **3,648** | recorded audio clips (UK & US pronunciation for A1/A2 words); harder words and examples use device TTS |
-| **0** | accounts, ads or trackers |
+### ☁️ QuickForm cloud progress backup
 
-<p align="center"><a href="docs/assets/demo.mp4"><b>▶ Watch the 30-second app demo</b></a></p>
+Powered by [QuickForm](https://quickform.cc/), learning progress can now be stored in the cloud:
 
-<img src="docs/assets/galaxy.jpg" alt="The word galaxy" width="100%">
+- In "Me → Data (QuickForm)", save your progress with your email address as the id and a short note;
+- On another device, load the list of saves and import any one to restore your local records.
 
-<img src="docs/assets/today-desktop.jpg" alt="Today" width="100%">
+### 🔊 Trimmed audio, TTS instead
 
-## What every entry has
+To deploy on Cloudflare (keeping the site under 20,000 files), pronunciation files were trimmed:
 
-- **An illustration** in one consistent vintage field-guide style, showing the scene of the first example.
-- **UK and US pronunciation**, plus a narrated everyday example (AI voices by ElevenLabs).
-- **Two original examples**: a short everyday sentence and an IELTS-register sentence on a common exam topic, both with natural Chinese translations.
-- **Up to three senses** in Chinese with short learner-friendly English definitions.
-- **Collocations, word family, synonyms and antonyms**, and one usage tip.
-- **CEFR level (A1–C2)** and one of **19 IELTS topics**.
+- UK/US recordings are kept for A1/A2 words (1,824 in total);
+- all other words and every example sentence are read by browser speech synthesis (TTS).
 
-## How it helps you remember
-
-- **Active recall** with four question types: meaning, picture cloze, listening and spelling.
-- **FSRS 6** spaced repetition (the open algorithm used by modern Anki) with an adjustable retention target.
-- **Honest scoring**: only the first attempt counts; wrong words return in a different format within the session without inflating accuracy.
-- **Typing studio** for words, sentences and dictation, measured separately from memory.
-- **Share cards** for any word or for the day's session.
-
-## The dataset (CC BY 4.0)
-
-- [`data/word-atlas.json`](data/word-atlas.json) and [`data/word-atlas.csv`](data/word-atlas.csv)
-- `public/atlas/img/` (512 px WebP) and `public/atlas/thumb/` (256 px)
-- `public/atlas/audio/{uk,us,ex}/` MP3
-
-Field reference: [docs/dataset.md](docs/dataset.md). Use it for Anki decks, apps, browser extensions, evaluation sets or research. Please credit "Word Atlas contributors".
-
-## Run it
+## Run locally
 
 ```bash
-npm ci
-npm run dev        # http://localhost:5188
-npm test
-npm run check:atlas
-npm run build      # static site in dist/; ATLAS_BASE=/sub/path/ for sub-path hosting
+git clone https://github.com/xiezuoru/word-atlas.git
+cd word-atlas
+npm install
+npm run dev
 ```
-
-## How the content was made
-
-The headword list is a common IELTS reading core list (7,298 unique entries). All entry content is newly written for this project: definitions, examples, collocations and tips by a large language model under one lexicographic spec; illustrations by an image model in one art direction; audio by ElevenLabs. The pipeline lives in [`scripts/atlas/`](scripts/atlas) and is described in [docs/pipeline.md](docs/pipeline.md).
-
-Everything passed automated structure and consistency checks, but it has **not** been proofread entry by entry. If you find a mistake, please open an issue or send a pull request against `data/`. This is not an official IELTS list and makes no score guarantees.
-
-## Follow along
-
-New features, study methods and behind-the-scenes notes are posted first on X: [@yangleiocx3](https://x.com/yangleiocx3). If Word Atlas helps you, star the repo and say hi on X.
-
-[![Follow @yangleiocx3 on X](https://img.shields.io/badge/Follow-@yangleiocx3-111?style=for-the-badge&logo=x&logoColor=white)](https://x.com/yangleiocx3)
 
 ## License
 
-Code: [MIT](LICENSE). Word content, illustrations and recordings: [CC BY 4.0](CONTENT_LICENSE.md), attribution "Word Atlas contributors".
+Code under MIT, content under CC BY 4.0, both inherited from the upstream project.
